@@ -1,3 +1,3 @@
-The devot:ee add-on.
+# The devot:ee add-on.
 
 We need a cool name.
