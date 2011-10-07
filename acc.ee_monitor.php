@@ -148,11 +148,20 @@ class Ee_monitor_acc {
 			}
 		}
 		
-		return $this->EE->load->view('updates', array('addons' => $this->_addons), TRUE);
+		$updates = $this->_get_updates();
+		
+		// return view
+		return $this->EE->load->view('updates', array('updates' => $updates), TRUE);
 	}
 	
 	/**
 	 * Set addon info
+	 *
+	 * @param	string
+	 * @param	string
+	 * @param	string
+	 * @param	array
+	 * @access	protected
 	 */
 	protected function _set_addon_info($package, $name, $version, $types)
 	{
@@ -161,6 +170,35 @@ class Ee_monitor_acc {
 			'version' => $version,
 			'types' => array_keys($types)
 		);
+	}
+	
+	/**
+	 * Get update info from API
+	 *
+	 * @access	protected
+	 * @return	array|string
+	 */
+	protected function _get_updates()
+	{
+		$data = array(
+			'data' => $this->_addons
+		);
+		
+		$ch = curl_init('http://expressionmonitor.com:3000/addons?api_key=eemonitoraccessory');
+		curl_setopt_array($ch, array(
+			CURLOPT_POST => TRUE,
+			CURLOPT_RETURNTRANSFER => TRUE,
+			CURLOPT_POSTFIELDS => json_encode($data),
+			CURLOPT_HTTPHEADER => array(
+				'Content-type: application/json'
+			)
+		));
+		$response = curl_exec($ch);
+		curl_close($ch);
+		
+		$response = json_decode($response);
+		
+		return $response;
 	}
 	
 }
