@@ -1,20 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * ExpressionMonitor Addon Accessory
+ * Devot:ee Addon Accessory
  *
  * @package		ExpressionEngine
  * @subpackage	Accessories
  * @author		Visual Chefs, LLC
  * @copyright	Copyright (c) 2011, Visual Chefs, LLC
  */
-class Ee_monitor_acc {
+class Devotee_acc {
 	
 	/**
 	 * Accessory information
 	 */
-	public $name = 'EE Monitor';
-	public $id = 'ee_monitor';
+	public $name = 'Devot:ee';
+	public $id = 'devot-ee';
 	public $version = '0.1.0';
 	public $description = 'Monitor your addons for updates';
 	public $sections = array();
@@ -68,7 +68,7 @@ class Ee_monitor_acc {
 	 */
 	public function set_sections()
 	{
-		$this->sections['Addon Updates'] = $this->_get_addons();
+		$this->sections['Addon Information'] = $this->_get_addons();
 	}
 	
 	/**
@@ -144,7 +144,26 @@ class Ee_monitor_acc {
 			elseif(array_key_exists($package, $installed['accessories']))
 			{
 				$addon = $installed['accessories'][$package];
-				$this->_set_addon_info($package, $addon['name'], $addon['accessory_version'], $types);
+				
+				// we need to load the class if not devotee to get more info
+				if($package != 'devotee')
+				{
+					$acc_path = PATH_THIRD.strtolower($package).'/';
+					$this->EE->load->add_package_path($acc_path, FALSE);
+					$acc = new $addon['class']();
+					$this->EE->load->remove_package_path($acc_path);
+				}
+				// if devotee accessory, we already have the info!
+				else
+				{
+					$acc = array(
+						'name' => $this->name,
+						'version' => $this->version
+					);
+					$acc = (object) $acc;
+				}
+				
+				$this->_set_addon_info($package, $acc->name, $acc->version, $types);
 			}
 		}
 		

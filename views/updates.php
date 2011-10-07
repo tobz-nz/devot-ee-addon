@@ -30,8 +30,12 @@
 		</tbody>
 	</table>
 <?php endif ?>
+
+<p><em>Powered by <a href="http://devot-ee.com/" target="_blank"><strong>Devot:ee</strong></a> in partnership with <a href="http://eecoder.com/" target="_blank"><strong>eecoder</strong></a>.</em></p>
+
 <style>
-	#ee_monitor table { border-collapse: collapse; }
-	#ee_monitor table th, #ee_monitor table td { padding: 5px; }
-	#ee_monitor table tr.update { background: rgba(255, 255, 255, 0.1); }
+	#devot-ee table { border-collapse: collapse; margin-bottom: 1em; }
+	#devot-ee table th, #devot-ee table td { padding: 5px; }
+	#devot-ee table tbody tr { border: 1px solid rgba(255, 255, 255, 0.2); border-width: 1px 0; }
+	#devot-ee table tr.update { background: rgba(255, 255, 255, 0.1); }
 </style>
