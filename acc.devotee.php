@@ -206,7 +206,10 @@ class Devotee_acc {
 		}
 		
 		// return view
-		return $this->EE->load->view('updates', array('updates' => json_decode($updates)), TRUE);
+		return $this->EE->load->view('updates', array(
+			'updates' => json_decode($updates),
+			'last_check' => filemtime($cache_file)
+		), TRUE);
 	}
 	
 	/**

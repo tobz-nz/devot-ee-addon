@@ -31,6 +31,8 @@
 	</table>
 <?php endif ?>
 
+<p><em>Last checked: <?= date('D, M j, Y, g:i A', $last_check) ?></em></p>
+
 <p><em>Powered by <a href="http://devot-ee.com/" target="_blank"><strong>Devot:ee</strong></a> in partnership with <a href="http://eecoder.com/" target="_blank"><strong>eecoder</strong></a>.</em></p>
 
 <style>
@@ -38,4 +40,5 @@
 	#devot-ee table th, #devot-ee table td { padding: 5px; }
 	#devot-ee table tbody tr { border: 1px solid rgba(255, 255, 255, 0.2); border-width: 1px 0; }
 	#devot-ee table tr.update { background: rgba(255, 255, 255, 0.1); }
+	#devot-ee a { color: #fff !important; }
 </style>
