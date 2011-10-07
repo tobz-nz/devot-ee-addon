@@ -82,6 +82,7 @@ class Ee_monitor_acc {
 		$this->EE->load->helper('directory');
 		$this->EE->load->library('addons');
 		$this->EE->load->model('addons_model');
+		$this->EE->load->library('api');
 		
 		// scan third_party folder
 		$map = directory_map(PATH_THIRD, 2);
@@ -91,6 +92,10 @@ class Ee_monitor_acc {
 		{
 			return 'No third-party addons were found.';
 		}
+		
+		// get fieldtypes because the addons library doesn't give all the info
+		$this->EE->api->instantiate('channel_fields');
+		$fieldtypes = $this->EE->api_channel_fields->fetch_all_fieldtypes();
 		
 		// set third-party addons
 		$third_party = array_intersect_key($this->EE->addons->_packages, $map);
@@ -132,7 +137,7 @@ class Ee_monitor_acc {
 			// check for fieldtype
 			elseif(array_key_exists($package, $installed['fieldtypes']))
 			{
-				$addon = $installed['fieldtypes'][$package];
+				$addon = $fieldtypes[$package];
 				$this->_set_addon_info($package, $addon['name'], $addon['version'], $types);
 			}
 			// check for accessory

@@ -2,6 +2,7 @@
 	<thead>
 		<tr>
 			<th>Addon</th>
+			<th>Type</th>
 			<th>Local Version</th>
 			<th>Current Version</th>
 			<th>Link</th>
@@ -11,6 +12,7 @@
 		<?php foreach($addons as $addon) : ?>
 		<tr>
 			<td><?= $addon['name'] ?></td>
+			<td><?= implode(', ', $addon['types']) ?></td>
 			<td><?= $addon['version'] ?></td>
 			<td>0.0.0</td>
 			<td><a href="#">More info</a></td>
