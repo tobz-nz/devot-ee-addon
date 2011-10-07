@@ -4,7 +4,8 @@
  * Devot:ee Addon Accessory
  *
  * @package		ExpressionEngine
- * @subpackage	Accessories
+ * @subpackage	Add-ons
+ * @category	Accessories
  * @author		Visual Chefs, LLC
  * @copyright	Copyright (c) 2011, Visual Chefs, LLC
  */
@@ -101,13 +102,15 @@ class Devotee_acc {
 	 */
 	protected function _get_addons()
 	{
+		$this->EE->load->helper('file');
+		
 		// cache file
 		$cache_file = $this->_cache_path.'addons';
 		
 		// if cache is still good, use it
 		if(file_exists($cache_file) AND filemtime($cache_file) > (time() - $this->_cache_time))
 		{
-			$updates = @file_get_contents($cache_file);
+			$updates = read_file($cache_file);
 		}
 		// fetch new content if cache expired
 		else
@@ -202,7 +205,7 @@ class Devotee_acc {
 			
 			$updates = $this->_get_updates();
 			
-			@file_put_contents($cache_file, $updates);
+			write_file($cache_file, $updates);
 		}
 		
 		// return view
