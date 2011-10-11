@@ -21,7 +21,7 @@
 				<td><?= $addon->current_version ?></td>
 				<td><?= $addon->notes ?></td>
 				<?php if($addon->update_available) : ?>
-					<td><a href="<?= $addon->devotee_link ?>" target="_blank">Get on Devot:ee</a></td>
+					<td><a href="<?= $addon->devotee_link ?>" target="_blank">Get on devot:ee</a></td>
 				<?php else : ?>
 					<td>&nbsp;</td>
 				<?php endif ?>
@@ -33,7 +33,7 @@
 
 <p><em>Last checked: <?= date('D, M j, Y, g:i A', $last_check) ?></em></p>
 
-<p><em>Powered by <a href="http://devot-ee.com/" target="_blank"><strong>Devot:ee</strong></a> in partnership with <a href="http://eecoder.com/" target="_blank"><strong>eecoder</strong></a>.</em></p>
+<p><em>Powered by <a href="http://devot-ee.com/" target="_blank"><strong>devot:ee</strong></a> in partnership with <a href="http://eecoder.com/" target="_blank"><strong>eecoder</strong></a>.</em></p>
 
 <style>
 	#devot-ee table { border-collapse: collapse; margin-bottom: 1em; }

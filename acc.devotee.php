@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Devot:ee Addon Accessory
+ * devot:ee Addon Accessory
  *
  * @package		ExpressionEngine
  * @subpackage	Add-ons
@@ -14,7 +14,7 @@ class Devotee_acc {
 	/**
 	 * Accessory information
 	 */
-	public $name = 'Devot:ee';
+	public $name = 'devot:ee';
 	public $id = 'devot-ee';
 	public $version = '0.1.0';
 	public $description = 'Monitor your addons for updates';
