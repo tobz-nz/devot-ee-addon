@@ -18,9 +18,9 @@
 				<td><?= $addon->name ?></td>
 				<td><?= implode(', ', $addon->types) ?></td>
 				<td><?= $addon->version ?></td>
-				<td><?= $addon->current_version ?></td>
+				<td><?= (! empty($addon->current_version)) ? $addon->current_version : '&ndash;' ?></td>
 				<td><?= $addon->notes ?></td>
-				<?php if($addon->update_available) : ?>
+				<?php if( ! empty($addon->devotee_link)) : ?>
 					<td><a href="<?= $addon->devotee_link ?>" target="_blank">Get on devot:ee</a></td>
 				<?php else : ?>
 					<td>&nbsp;</td>

@@ -245,7 +245,7 @@ class Devotee_acc {
 			'data' => $this->_addons
 		);
 		
-		$ch = curl_init('http://expressionmonitor.com:3000/addons?api_key=eemonitoraccessory');
+		$ch = curl_init('http://expressionmonitor.com:3000/addons');
 		curl_setopt_array($ch, array(
 			CURLOPT_POST => TRUE,
 			CURLOPT_RETURNTRANSFER => TRUE,
