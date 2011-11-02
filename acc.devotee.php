@@ -210,7 +210,7 @@ class Devotee_acc {
 		
 		// return view
 		return $this->EE->load->view('updates', array(
-			'updates' => json_decode($updates),
+			'updates' => $this->json_decode($updates),
 			'last_check' => filemtime($cache_file)
 		), TRUE);
 	}
@@ -249,7 +249,7 @@ class Devotee_acc {
 		curl_setopt_array($ch, array(
 			CURLOPT_POST => TRUE,
 			CURLOPT_RETURNTRANSFER => TRUE,
-			CURLOPT_POSTFIELDS => json_encode($data),
+			CURLOPT_POSTFIELDS => $this->json_encode($data),
 			CURLOPT_HTTPHEADER => array(
 				'Content-type: application/json'
 			)
@@ -258,6 +258,55 @@ class Devotee_acc {
 		curl_close($ch);
 		
 		return $response;
+	}
+	
+	/**
+	 * Encodes JSON
+	 *
+	 * This was written because currently EE supports PHP versions lower than 5.2,
+	 * which do not contain native JSON support.
+	 *
+	 * @param   mixed
+	 * @return  string
+	 * @access  protected
+	 */
+	protected function json_encode($content)
+	{
+		if( ! function_exists('json_encode'))
+		{
+			require_once PATH_THIRD.'devotee/lib/JSON.php';
+			
+			$json = new Services_JSON;
+			
+			return $json->encode($content);
+		}
+		
+		return json_encode($content);
+	}
+	
+	/**
+	 * Decodes JSON
+	 *
+	 * This was written because currently EE supports PHP versions lower than 5.2,
+	 * which do not contain native JSON support.
+	 *
+	 * @param   string
+	 * @param   bool
+	 * @return  mixed
+	 * @access  protected
+	 */
+	protected function json_decode($content, $assoc = FALSE)
+	{
+		if( ! function_exists('json_decode'))
+		{
+			require_once PATH_THIRD.'devotee/lib/JSON.php';
+			
+			$json = ($assoc == TRUE) ? new Services_JSON(SERVICES_JSON_LOOSE_TYPE) : new Services_JSON;
+			
+			return $json->decode($content);
+		}
+		
+		return json_decode($content, $assoc);
 	}
 	
 }
