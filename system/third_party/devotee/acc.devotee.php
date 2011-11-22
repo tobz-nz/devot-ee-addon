@@ -91,7 +91,7 @@ class Devotee_acc {
 	 */
 	public function set_sections()
 	{
-		$this->sections['Addon Information'] = $this->_get_addons();
+		$this->sections['Add-on Information'] = $this->_get_addons();
 	}
 	
 	/**

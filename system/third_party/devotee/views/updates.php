@@ -48,7 +48,7 @@
 										<span class="available">Update Available</span>
 									</td>
 									<td class="addon-link">
-										<a href="<?php echo $addon->devotee_link ?>" class="available">
+										<a href="<?php echo $addon->devotee_link ?>" class="available" target="_blank">
 											Get Update
 											<span></span>
 										</a>
