@@ -211,7 +211,8 @@ class Devotee_acc {
 		// return view
 		return $this->EE->load->view('updates', array(
 			'updates' => $this->json_decode($updates),
-			'last_check' => filemtime($cache_file)
+			'last_check' => filemtime($cache_file),
+			'theme_url' => $this->EE->config->item('theme_folder_url') . 'third_party/devotee/'
 		), TRUE);
 	}
 	
