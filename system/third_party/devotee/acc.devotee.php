@@ -269,6 +269,22 @@ class Devotee_acc {
 	}
 	
 	/**
+	 * AJAX method for clearing cache and reloading the addons list
+	 */
+	public function process_refresh()
+	{
+		if(AJAX_REQUEST)
+		{
+			// delete cache
+			$this->EE->functions->delete_directory(APPPATH.'cache/devotee');
+			
+			// output html from view
+			echo $this->_get_addons();
+			exit;
+		}
+	}
+	
+	/**
 	 * Encodes JSON
 	 *
 	 * This was written because currently EE supports PHP versions lower than 5.2,

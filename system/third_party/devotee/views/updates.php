@@ -84,7 +84,7 @@
 		<?php endif ?>
 		
 		<div id="devotee-footer">
-			<p>Last Add-on Check: <?php echo date('l, M. j, Y @ g:ia.', $last_check) ?> <a href="#" class="available">Check Now</a></p>
+			<p>Last Add-on Check: <?php echo date('l, M. j, Y @ g:ia.', $last_check) ?> <a href="<?php echo BASE . AMP . 'C=addons_accessories' . AMP . 'M=process_request' . AMP . 'accessory=devotee' . AMP . 'method=process_refresh' ?>" class="available refresh">Check Now</a></p>
 			<p class="logos">
 				<a href="http://devot-ee.com" target="_blank" class="first">Devot:ee</a>
 				<a href="http://eecoder.com" target="_blank" class="last">eecoder</a>
