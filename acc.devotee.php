@@ -245,7 +245,7 @@ class Devotee_acc {
 			'data' => $this->_addons
 		);
 		
-		$ch = curl_init('http://expressionmonitor.com:3000/addons');
+		$ch = curl_init('http://expressionmonitor.com:8080/updates');
 		curl_setopt_array($ch, array(
 			CURLOPT_POST => TRUE,
 			CURLOPT_RETURNTRANSFER => TRUE,
@@ -256,6 +256,13 @@ class Devotee_acc {
 		));
 		$response = curl_exec($ch);
 		curl_close($ch);
+		
+		if( ! $response)
+		{
+			$response = $this->json_encode(array(
+				'error' => 'The API could not be reached. Try again later.'
+			));
+		}
 		
 		return $response;
 	}
