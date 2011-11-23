@@ -29,7 +29,13 @@
 								<td class="addon-notes">&nbsp;</td>
 							<?php endif ?>
 							<td class="addon-name"><?php echo $addon->name ?></td>
-							<td class="addon-type"><?php echo implode(', ', $addon->types) ?></td>
+							<td class="addon-type">
+								<ul>
+									<?php foreach($addon->types as $key => $val) : ?>
+										<li class="<?php echo ($val) ? 'highlight' : '' ?>"><?php echo $key ?></li>
+									<?php endforeach ?>
+								</ul>
+							</td>
 							<td class="addon-installed"><?php echo $addon->version ?></td>
 							<td class="addon-current">
 								<?php if($addon->current_version != '') : ?>

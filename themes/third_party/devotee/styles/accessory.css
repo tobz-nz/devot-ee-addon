@@ -120,6 +120,19 @@
 	font-weight:bold;
 	text-transform:uppercase;
 }
+#devot-ee table td.addon-type ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#devot-ee table td.addon-type ul li {
+	color: #516475;
+	display: inline;
+	margin-right: 5px;
+}
+#devot-ee table td.addon-type ul li.highlight {
+	color: #fff;
+}
 /* status */
 #devot-ee table .addon-status a, #devot-ee table .addon-status span {
 	display:block;

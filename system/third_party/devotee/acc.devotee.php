@@ -209,7 +209,7 @@ class Devotee_acc {
 		}
 		
 		// return view
-		return $this->EE->load->view('updates', array(
+		return $this->EE->load->view('accessory', array(
 			'updates' => $this->json_decode($updates),
 			'last_check' => filemtime($cache_file),
 			'theme_url' => $this->EE->config->item('theme_folder_url') . 'third_party/devotee/'
@@ -230,7 +230,7 @@ class Devotee_acc {
 		$this->_addons[$package] = array(
 			'name' => $name,
 			'version' => $version,
-			'types' => array_keys($types)
+			'types' => $this->_abbreviate_types(array_keys($types))
 		);
 	}
 	
@@ -266,6 +266,34 @@ class Devotee_acc {
 		}
 		
 		return $response;
+	}
+	
+	/**
+	 * Create an abbreviated list of add-on types, and designates whether the current add-on
+	 * is of a particular type
+	 *
+	 * @param   array
+	 * @return  array
+	 * @access  protected
+	 */
+	protected function _abbreviate_types($types = array())
+	{
+		$available_types = array(
+			'module' => 'MOD',
+			'extension' => 'EXT',
+			'plugin' => 'PLG',
+			'fieldtype' => 'FLD',
+			'accessory' => 'ACC'
+		);
+		
+		$abbrevs = array();
+		
+		foreach($available_types as $key => $abbrev)
+		{
+			$abbrevs[$abbrev] = (in_array($key, $types)) ? TRUE : FALSE;
+		}
+		
+		return $abbrevs;
 	}
 	
 	/**
