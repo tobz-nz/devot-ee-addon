@@ -2,6 +2,12 @@
 #accessoryTabs {
 	height:30px;
 }
+#accessoryTabs li#devot-ee-accessory-tab.updates-available a {
+	background-image: url(../images/icon-warning.png);
+	background-position: 80% center;
+	background-repeat: no-repeat;
+	padding-right: 40px;
+}
 #devot-ee {
 	padding:0 !important;
 }

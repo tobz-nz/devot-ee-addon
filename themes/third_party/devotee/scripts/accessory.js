@@ -17,3 +17,11 @@ $('#devot-ee a.refresh').live('click', function() {
 	
 	return false;
 });
+
+// add id to accessory tab
+$('#accessoryTabs > ul a.devot-ee').parent('li').attr('id', 'devot-ee-accessory-tab');
+
+// add icon to tab if there are updates available
+if($('#devot-ee table tr.update').length > 0) {
+	$('#devot-ee-accessory-tab').addClass('updates-available');
+}
