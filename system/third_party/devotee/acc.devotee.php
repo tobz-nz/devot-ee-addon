@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * devot:ee Addon Accessory
+ * devot:ee Add-on Accessory
  *
  * @package		ExpressionEngine
  * @subpackage	Add-ons
@@ -45,6 +45,12 @@ class Devotee_acc {
 	protected $_cache_time;
 	
 	/**
+	 * @var     string
+	 * @access  protected
+	 */
+	protected $theme_url;
+	
+	/**
 	 * Constructor
 	 */
 	public function __construct()
@@ -60,6 +66,9 @@ class Devotee_acc {
 		{
 			mkdir($this->_cache_path);
 		}
+		
+		// set theme url
+		$this->theme_url = $this->EE->config->item('theme_folder_url') . 'third_party/devotee/';
 	}
 	
 	/**
@@ -92,6 +101,10 @@ class Devotee_acc {
 	public function set_sections()
 	{
 		$this->sections['Add-on Information'] = $this->_get_addons();
+		
+		// add assets to cp
+		$this->EE->cp->add_to_head('<link rel="stylesheet" href="' . $this->theme_url . 'styles/accessory.css" />');
+		$this->EE->cp->add_to_head('<script type="text/javascript" src="' . $this->theme_url . 'scripts/accessory.js"></script>');
 	}
 	
 	/**
@@ -211,8 +224,7 @@ class Devotee_acc {
 		// return view
 		return $this->EE->load->view('accessory', array(
 			'updates' => $this->json_decode($updates),
-			'last_check' => filemtime($cache_file),
-			'theme_url' => $this->EE->config->item('theme_folder_url') . 'third_party/devotee/'
+			'last_check' => filemtime($cache_file)
 		), TRUE);
 	}
 	

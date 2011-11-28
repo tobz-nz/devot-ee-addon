@@ -109,6 +109,3 @@
 
 	</div><!-- /.border -->
 </div><!-- /.border -->
-
-<link rel="stylesheet" href="<?php echo $theme_url ?>styles/accessory.css" />
-<script src="<?php echo $theme_url ?>scripts/accessory.js"></script>
