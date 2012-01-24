@@ -256,7 +256,7 @@ class Devotee_acc {
 	{
 		$data = array(
 			'data' => $this->_addons,
-			'site_url' => $this->EE->config->item('site_url'),
+			'site_ip' => $this->EE->input->ip_address(),
 		);
 		
 		$ch = curl_init('http://expressionmonitor.com:8080/updates');
