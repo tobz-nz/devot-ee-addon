@@ -53,20 +53,17 @@
 									<td class="addon-status">
 										<span class="available">Update Available</span>
 									</td>
-									<td class="addon-link">
-										<a href="<?php echo $addon->devotee_link ?>" class="available" target="_blank">
-											Get Update
-											<span></span>
-										</a>
-									</td>
 								<?php else : ?>
 									<td class="addon-status">
 										<span class="check">Up-to-date</span>
 									</td>
-									<td class="addon-link">
-										&nbsp;
-									</td>
 								<?php endif ?>
+								<td class="addon-link">
+									<a href="<?php echo $addon->devotee_link ?>" class="available" target="_blank">
+										View on devot:ee
+										<span></span>
+									</a>
+								</td>
 							<?php else : ?>
 								<td class="addon-status">
 									<a href="http://devot-ee.com/search/results/search&keywords=<?php echo rawurlencode($addon->name) ?>&channel=addons&addon_version_support=ee2/" target="_blank" class="warning">Not Found - Search devot:ee</a>

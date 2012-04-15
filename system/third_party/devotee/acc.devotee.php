@@ -64,7 +64,7 @@ class Devotee_acc {
 		// create cache folder if it doesn't exist
 		if(!is_dir($this->_cache_path))
 		{
-			mkdir($this->_cache_path);
+			mkdir($this->_cache_path, 0777);
 		}
 		
 		// set theme url
