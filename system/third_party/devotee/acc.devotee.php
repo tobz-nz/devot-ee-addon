@@ -59,7 +59,7 @@ class Devotee_acc {
 		
 		// set cache settings
 		$this->_cache_path = APPPATH.'cache/devotee/';
-		$this->_cache_time = 60*15; // 15 minutes
+		$this->_cache_time = 60*60; // 1 hour
 		
 		// create cache folder if it doesn't exist
 		if(!is_dir($this->_cache_path))
