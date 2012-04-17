@@ -95,7 +95,7 @@
 			<p>
 				<small>
 					EE Add-on Monitor is proudly powered by
-					<a href="http://devot-ee.com" target="_blank">Devot:ee</a>
+					<a href="http://devot-ee.com" target="_blank">devot:ee</a>
 					in partnership with
 					<a href="http://eecoder.com" target="_blank">eecoder</a>.
 					Designed by
