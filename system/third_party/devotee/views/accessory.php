@@ -59,20 +59,20 @@
 									</td>
 								<?php endif ?>
 								<td class="addon-link">
-									<a href="<?php echo $addon->devotee_link ?>" class="available" target="_blank">
+									<a href="<?php echo $addon->devotee_link ?>?utm_source=site&utm_medium=acc_link_addon&utm_campaign=monitor" class="available" target="_blank">
 										View on devot:ee
 										<span></span>
 									</a>
 								</td>
 							<?php else : ?>
 								<td class="addon-status">
-									<a href="http://devot-ee.com/search/results/search&keywords=<?php echo rawurlencode($addon->name) ?>&channel=addons&addon_version_support=ee2/" target="_blank" class="warning">Not Found - Search devot:ee</a>
+									<a href="http://devot-ee.com/search/results/search&keywords=<?php echo rawurlencode($addon->name) ?>&channel=addons&addon_version_support=ee2/?utm_source=site&utm_medium=acc_link_search&utm_campaign=monitor" target="_blank" class="warning">Not Found - Search devot:ee</a>
 								</td>
 								<td class="addon-link">
 									&nbsp;
 								</td>
 							<?php endif ?>
-						</tr>						
+						</tr>
 						<?php if($addon->notes) : ?>
 							<tr class="notes">
 								<td class="notes" colspan="7">
@@ -85,17 +85,17 @@
 				</tbody>
 			</table>
 		<?php endif ?>
-		
+
 		<div id="devotee-footer">
 			<p>Last Add-on Check: <?php echo date('l, M. j, Y @ g:ia.', $last_check) ?> <a href="<?php echo BASE . AMP . 'C=addons_accessories' . AMP . 'M=process_request' . AMP . 'accessory=devotee' . AMP . 'method=process_refresh' ?>" class="available refresh">Check Now</a></p>
 			<p class="logos">
-				<a href="http://devot-ee.com" target="_blank" class="first">Devot:ee</a>
+				<a href="http://devot-ee.com/?utm_source=site&utm_medium=acc_link_logo&utm_campaign=monitor" target="_blank" class="first">devot:ee</a>
 				<a href="http://eecoder.com" target="_blank" class="last">eecoder</a>
 			</p>
 			<p>
 				<small>
 					EE Add-on Monitor is proudly powered by
-					<a href="http://devot-ee.com" target="_blank">devot:ee</a>
+					<a href="http://devot-ee.com?utm_source=site&utm_medium=acc_link_title&utm_campaign=monitor" target="_blank">devot:ee</a>
 					in partnership with
 					<a href="http://eecoder.com" target="_blank">eecoder</a>.
 					Designed by
