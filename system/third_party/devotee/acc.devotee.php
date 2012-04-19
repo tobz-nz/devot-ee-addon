@@ -198,9 +198,13 @@ class Devotee_acc {
 					if($package != 'devotee')
 					{
 						$acc_path = PATH_THIRD.strtolower($package).'/';
-						$this->EE->load->add_package_path($acc_path, FALSE);
-						$acc = new $addon['class']();
-						$this->EE->load->remove_package_path($acc_path);
+						
+						if(class_exists($acc_path))
+						{
+							$this->EE->load->add_package_path($acc_path, FALSE);
+							$acc = new $addon['class']();
+							$this->EE->load->remove_package_path($acc_path);
+						}
 					}
 					// if devotee accessory, we already have the info!
 					else
@@ -212,7 +216,10 @@ class Devotee_acc {
 						$acc = (object) $acc;
 					}
 					
-					$this->_set_addon_info($package, $acc->name, $acc->version, $types);
+					if($acc)
+					{
+						$this->_set_addon_info($package, $acc->name, $acc->version, $types);
+					}
 				}
 			}
 			
