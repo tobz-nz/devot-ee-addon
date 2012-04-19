@@ -18,6 +18,13 @@
 				</thead>
 				<tbody>
 					<?php foreach($updates as $addon) : ?>
+						<?php
+							// convert to object if need be on some php versions
+							if( ! is_object($addon))
+							{
+								$addon = (object) $addon;
+							}
+						?>
 						<?php if($addon->update_available) : ?>
 							<tr class="update<?php if($addon->notes) : ?> notes<?php endif ?>">
 						<?php else : ?>
