@@ -84,7 +84,7 @@
 							<tr class="notes">
 								<td class="notes" colspan="7">
 									<h6>Release Notes</h6>
-									<?php echo $addon->notes ?>
+									<?php echo nl2br($addon->notes) ?>
 								</td>
 							</tr>
 						<?php endif ?>
