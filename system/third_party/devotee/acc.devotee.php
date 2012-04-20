@@ -222,7 +222,7 @@ class Devotee_acc {
 						$acc = (object) $acc;
 					}
 					
-					if($acc)
+					if(isset($acc))
 					{
 						$this->_set_addon_info($package, $acc->name, $acc->version, $types);
 					}
