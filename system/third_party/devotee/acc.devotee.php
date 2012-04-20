@@ -16,7 +16,7 @@ class Devotee_acc {
 	 */
 	public $name = 'devot:ee';
 	public $id = 'devot-ee';
-	public $version = '1.0.2';
+	public $version = '1.0.3';
 	public $description = 'Monitor your add-ons for updates.';
 	public $sections = array();
 
@@ -221,7 +221,7 @@ class Devotee_acc {
 						);
 						$acc = (object) $acc;
 					}
-					
+
 					if(isset($acc))
 					{
 						$this->_set_addon_info($package, $acc->name, $acc->version, $types);
