@@ -28,9 +28,9 @@
 						<?php if($addon->update_available) : ?>
 							<tr class="update<?php if($addon->notes) : ?> notes<?php endif ?>">
 						<?php else : ?>
-							<tr<?php if($addon->notes) : ?> class="notes"<?php endif ?>>
+							<tr>
 						<?php endif ?>
-							<?php if($addon->notes) : ?>
+							<?php if($addon->update_available && $addon->notes) : ?>
 								<td class="addon-notes"><a href="#" class="toggle"></a></td>
 							<?php else : ?>
 								<td class="addon-notes">&nbsp;</td>
@@ -80,7 +80,7 @@
 								</td>
 							<?php endif ?>
 						</tr>
-						<?php if($addon->notes) : ?>
+						<?php if($addon->update_available && $addon->notes) : ?>
 							<tr class="notes">
 								<td class="notes" colspan="7">
 									<h6>Release Notes</h6>
