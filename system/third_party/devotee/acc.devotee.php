@@ -16,7 +16,7 @@ class Devotee_acc {
 	 */
 	public $name = 'devot:ee';
 	public $id = 'devot-ee';
-	public $version = '1.0.3';
+	public $version = '1.0.4';
 	public $description = 'Monitor your add-ons for updates.';
 	public $sections = array();
 
