@@ -1,76 +1,76 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * devot:ee Add-on Accessory
+ * Devot:ee Monitor
  *
  * @package		ExpressionEngine
  * @subpackage	Add-ons
  * @category	Accessories
  * @author		Visual Chefs, LLC
- * @copyright	Copyright (c) 2011, Visual Chefs, LLC
+ * @copyright	Copyright (c) 2011-2012, Visual Chefs, LLC
  */
 class Devotee_acc {
-	
+
 	/**
 	 * Accessory information
 	 */
 	public $name = 'devot:ee';
 	public $id = 'devot-ee';
-	public $version = '1.0.0';
-	public $description = 'Monitor your addons for updates';
+	public $version = '1.0.2';
+	public $description = 'Monitor your add-ons for updates.';
 	public $sections = array();
-	
+
 	/**
 	 * @var		object
 	 * @access	protected
 	 */
 	protected $EE;
-	
+
 	/**
 	 * @var		array
 	 * @access	protected
 	 */
 	protected $_addons = array();
-	
+
 	/**
 	 * @var		string
 	 * @access	protected
 	 */
 	protected $_cache_path;
-	
+
 	/**
 	 * @var		int
 	 * @access	protected
 	 */
 	protected $_cache_time;
-	
+
 	/**
 	 * @var     string
 	 * @access  protected
 	 */
 	protected $theme_url;
-	
+
 	/**
 	 * Constructor
 	 */
 	public function __construct()
 	{
 		$this->EE =& get_instance();
-		
+
 		// set cache settings
 		$this->_cache_path = APPPATH.'cache/devotee/';
 		$this->_cache_time = 60*60; // 1 hour
-		
+
 		// create cache folder if it doesn't exist
 		if(!is_dir($this->_cache_path))
 		{
 			mkdir($this->_cache_path, 0777);
 		}
-		
+
 		// set theme url
 		$this->theme_url = $this->EE->config->item('theme_folder_url') . 'third_party/devotee/';
 	}
-	
+
 	/**
 	 * Install accessory
 	 */
@@ -78,7 +78,7 @@ class Devotee_acc {
 	{
 		return TRUE;
 	}
-	
+
 	/**
 	 * Update accessory
 	 */
@@ -86,7 +86,7 @@ class Devotee_acc {
 	{
 		return TRUE;
 	}
-	
+
 	/**
 	 * Uninstall accessory
 	 */
@@ -94,19 +94,19 @@ class Devotee_acc {
 	{
 		return TRUE;
 	}
-	
+
 	/**
 	 * Set accessory sections
 	 */
 	public function set_sections()
 	{
 		$this->sections['Add-on Information'] = $this->_get_addons();
-		
+
 		// add assets to cp
 		$this->EE->cp->add_to_head('<link rel="stylesheet" href="' . $this->theme_url . 'styles/accessory.css" />');
 		$this->EE->cp->add_to_head('<script type="text/javascript" src="' . $this->theme_url . 'scripts/accessory.js"></script>');
 	}
-	
+
 	/**
 	 * Get installed addon information
 	 *
@@ -116,16 +116,16 @@ class Devotee_acc {
 	protected function _get_addons()
 	{
 		$this->EE->load->helper('file');
-		
+
 		// load json services if not available in php
 		if( ! function_exists('json_decode'))
 		{
 			$this->EE->load->library('Services_json');
 		}
-		
+
 		// cache file
 		$cache_file = $this->_cache_path.'addons';
-		
+
 		// if cache is still good, use it
 		if(file_exists($cache_file) AND filemtime($cache_file) > (time() - $this->_cache_time))
 		{
@@ -138,23 +138,23 @@ class Devotee_acc {
 			$this->EE->load->library('addons');
 			$this->EE->load->model('addons_model');
 			$this->EE->load->library('api');
-			
+
 			// scan third_party folder
 			$map = directory_map(PATH_THIRD, 2);
-			
+
 			// return if nothing found
 			if($map === FALSE)
 			{
 				return 'No third-party addons were found.';
 			}
-			
+
 			// get fieldtypes because the addons library doesn't give all the info
 			$this->EE->api->instantiate('channel_fields');
 			$fieldtypes = $this->EE->api_channel_fields->fetch_all_fieldtypes();
-			
+
 			// set third-party addons
 			$third_party = array_intersect_key($this->EE->addons->_packages, $map);
-			
+
 			// get all installed addons
 			$installed = array(
 				'modules' => $this->EE->addons->get_installed('modules'),
@@ -163,14 +163,14 @@ class Devotee_acc {
 				'fieldtypes' => $this->EE->addons->get_installed('fieldtypes'),
 				'accessories' => $this->EE->addons->get_installed('accessories')
 			);
-			
+
 			foreach($third_party as $package => $types)
 			{
 				if(array_key_exists($package, $this->_addons))
 				{
 					continue;
 				}
-				
+
 				// check for module
 				if(array_key_exists($package, $installed['modules']))
 				{
@@ -199,12 +199,12 @@ class Devotee_acc {
 				elseif(array_key_exists($package, $installed['accessories']))
 				{
 					$addon = $installed['accessories'][$package];
-					
+
 					// we need to load the class if not devotee to get more info
 					if($package != 'devotee')
 					{
 						$acc_path = PATH_THIRD.strtolower($package).'/';
-						
+
 						if(class_exists($acc_path))
 						{
 							$this->EE->load->add_package_path($acc_path, FALSE);
@@ -228,19 +228,19 @@ class Devotee_acc {
 					}
 				}
 			}
-			
+
 			$updates = $this->_get_updates();
-			
+
 			write_file($cache_file, $updates);
 		}
-		
+
 		// return view
 		return $this->EE->load->view('accessory', array(
 			'updates' => json_decode($updates),
 			'last_check' => filemtime($cache_file)
 		), TRUE);
 	}
-	
+
 	/**
 	 * Set addon info
 	 *
@@ -258,7 +258,7 @@ class Devotee_acc {
 			'types' => $this->_abbreviate_types(array_keys($types))
 		);
 	}
-	
+
 	/**
 	 * Get update info from API
 	 *
@@ -271,7 +271,7 @@ class Devotee_acc {
 			'data' => $this->_addons,
 			'site_ip' => $this->EE->input->ip_address(),
 		);
-		
+
 		$ch = curl_init('http://expressionmonitor.com:8080/updates');
 		curl_setopt_array($ch, array(
 			CURLOPT_POST => TRUE,
@@ -283,17 +283,17 @@ class Devotee_acc {
 		));
 		$response = curl_exec($ch);
 		curl_close($ch);
-		
+
 		if( ! $response)
 		{
 			$response = $this->EE->javascript->generate_json(array(
 				'error' => 'The API could not be reached. Try again later.'
 			), TRUE);
 		}
-		
+
 		return $response;
 	}
-	
+
 	/**
 	 * Create an abbreviated list of add-on types, and designates whether the current add-on
 	 * is of a particular type
@@ -311,17 +311,17 @@ class Devotee_acc {
 			'fieldtype' => 'FLD',
 			'accessory' => 'ACC'
 		);
-		
+
 		$abbrevs = array();
-		
+
 		foreach($available_types as $key => $abbrev)
 		{
 			$abbrevs[$abbrev] = (in_array($key, $types)) ? TRUE : FALSE;
 		}
-		
+
 		return $abbrevs;
 	}
-	
+
 	/**
 	 * AJAX method for clearing cache and reloading the addons list
 	 */
@@ -331,13 +331,13 @@ class Devotee_acc {
 		{
 			// delete cache
 			$this->EE->functions->delete_directory(APPPATH.'cache/devotee');
-			
+
 			// output html from view
 			echo $this->_get_addons();
 			exit;
 		}
 	}
-	
+
 }
 
 /* End of file acc.ee_monitor.php */
