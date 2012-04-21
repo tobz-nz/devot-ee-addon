@@ -39,7 +39,7 @@
 							<td class="addon-type">
 								<ul>
 									<?php foreach($addon->types as $key => $val) : ?>
-										<li class="<?php echo ($val) ? 'highlight' : '' ?>"><?php echo $key ?></li>
+										<li class="<?php echo ($val) ? 'highlight' : '' ?>"><?php if ($val) {?><a href="<?php echo BASE.'&amp;C=addons_'.plural(array_search($key, $available_types))?>"><?php echo $key ?></a><?php } else { echo $key; }?></li>
 									<?php endforeach ?>
 								</ul>
 							</td>

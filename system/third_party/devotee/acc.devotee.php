@@ -33,6 +33,18 @@ class Devotee_acc {
 	protected $_addons = array();
 
 	/**
+	 * @var		array
+	 * @access	protected
+	 */
+	protected $_available_types = array(
+		'module' => 'MOD',
+		'extension' => 'EXT',
+		'plugin' => 'PLG',
+		'fieldtype' => 'FLD',
+		'accessory' => 'ACC'
+	);
+
+	/**
 	 * @var		string
 	 * @access	protected
 	 */
@@ -64,7 +76,7 @@ class Devotee_acc {
 		// create cache folder if it doesn't exist
 		if(!is_dir($this->_cache_path))
 		{
-			mkdir($this->_cache_path, DIR_WRITE_MODE);
+			mkdir($this->_cache_path, 0777);
 		}
 
 		// set theme url
@@ -115,7 +127,7 @@ class Devotee_acc {
 	 */
 	protected function _get_addons()
 	{
-		$this->EE->load->helper('file');
+		$this->EE->load->helper(array('file','inflector'));
 
 		// load json services if not available in php
 		if( ! function_exists('json_decode'))
@@ -237,7 +249,8 @@ class Devotee_acc {
 		// return view
 		return $this->EE->load->view('accessory', array(
 			'updates' => json_decode($updates),
-			'last_check' => filemtime($cache_file)
+			'last_check' => filemtime($cache_file),
+			'available_types'=>$this->_available_types
 		), TRUE);
 	}
 
@@ -304,17 +317,10 @@ class Devotee_acc {
 	 */
 	protected function _abbreviate_types($types = array())
 	{
-		$available_types = array(
-			'module' => 'MOD',
-			'extension' => 'EXT',
-			'plugin' => 'PLG',
-			'fieldtype' => 'FLD',
-			'accessory' => 'ACC'
-		);
 
 		$abbrevs = array();
 
-		foreach($available_types as $key => $abbrev)
+		foreach($this->_available_types as $key => $abbrev)
 		{
 			$abbrevs[$abbrev] = (in_array($key, $types)) ? TRUE : FALSE;
 		}
